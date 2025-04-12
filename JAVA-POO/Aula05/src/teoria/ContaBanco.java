@@ -1,0 +1,160 @@
+/*class ContaBanco
+ * 
+ * ATRIBUTOS ( necessário getters e setter para cada um)
+ * + numConta
+ * # tipo } só aceita 2 tipos: CC(corrente) ou CP(poupança)
+ * - dono
+ * - saldo
+ * - status
+ * MÉTODOS (Todos são public)
+ * - abrirConta() } muda o status para true e tenho que definir qual o tipo de conta CC ou CP
+ * -- CC abre a conta com 50 reais de crédito / CP abre a conta com 150 reais de crédito
+ * - fecharConta() } não pode ter dinheiro nem dívida na conta
+ * - depositar() } o status precisa estar true
+ * - sacar() } o status precisa estar true e eu preciso ter dinheiro na conta
+ * - pagarMensal() } sempre que chamado, será descontado um valor da conta do usuário.
+ * -- CC paga 12 reais de mensalidade / CP paga 20 reais de mensalidade
+ * 
+ * MÉTODO CONSTRUTOR
+ * - O saldo precisa ser definido como 0 e o status tem que estar false
+ */
+
+ public class ContaBanco {
+
+    // ATRIBUTOS
+    public int numConta;
+    protected String tipo;
+    private String dono;
+    private double saldo;
+    private boolean status;
+
+    // MÉTODO CONSTRUTOR
+    public ContaBanco(int numConta, String tipo, String dono) {
+        this.numConta = numConta;
+        this.tipo = tipo;
+        this.dono = dono;
+        this.saldo = 0;
+        this.status = false;
+    }
+
+    // MÉTODOS
+    public void abrirConta() {
+        if (!this.tipo.equals("CC") && !this.tipo.equals("CP")) {
+            System.out.println("Tipo de conta inválido.");
+            return;
+        }
+
+        if (this.status) {
+            System.out.println("A conta já está aberta.");
+            return;
+        }
+
+        this.status = true;
+        if (this.tipo.equals("CP")) {
+            this.saldo += 150;
+        } else {
+            this.saldo += 50;
+        }
+
+        System.out.println("Conta aberta com sucesso!");
+    }
+
+    public void fecharConta() {
+        if (this.saldo != 0) {
+            System.out.println("Não é possível fechar a conta com saldo ou dívida.");
+        } else {
+            this.status = false;
+            System.out.println("Conta encerrada com sucesso.");
+        }
+    }
+
+    public void depositar(double valor) {
+        if (this.status) {
+            this.saldo += valor;
+            System.out.println("Depósito de R$" + valor + " realizado com sucesso.");
+        } else {
+            System.out.println("Não é possível depositar: conta está fechada.");
+        }
+    }
+
+    public void sacar(double valor) {
+        if (!this.status) {
+            System.out.println("Conta está fechada. Impossível sacar.");
+            return;
+        }
+
+        if (this.saldo >= valor) {
+            this.saldo -= valor;
+            System.out.println("Saque de R$" + valor + " realizado com sucesso.");
+        } else {
+            System.out.println("Saldo insuficiente para saque.");
+        }
+    }
+
+    public void pagarMensal() {
+        if (!this.status) {
+            System.out.println("Conta está fechada. Não é possível pagar mensalidade.");
+            return;
+        }
+
+        double valorMensal = this.tipo.equals("CC") ? 12 : 20;
+
+        if (this.saldo >= valorMensal) {
+            this.saldo -= valorMensal;
+            System.out.println("Mensalidade de R$" + valorMensal + " debitada.");
+        } else {
+            System.out.println("Saldo insuficiente para pagar mensalidade.");
+        }
+    }
+
+    public void mostrarConta() {
+        System.out.println("========= DADOS DA CONTA =========");
+        System.out.println("Número: " + this.numConta);
+        System.out.println("Tipo: " + this.tipo);
+        System.out.println("Dono: " + this.dono);
+        System.out.println("Saldo: R$" + this.saldo);
+        System.out.println("Status: " + (this.status ? "Aberta" : "Fechada"));
+        System.out.println("==================================");
+    }
+
+    // GETTERS E SETTERS
+    public int getNumConta() {
+        return numConta;
+    }
+
+    public void setNumConta(int numConta) {
+        this.numConta = numConta;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getDono() {
+        return dono;
+    }
+
+    public void setDono(String dono) {
+        this.dono = dono;
+    }
+
+    public double getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(double saldo) {
+        this.saldo = saldo;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+}
