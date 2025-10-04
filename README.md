@@ -8,6 +8,7 @@ Repositório dedicado aos meus estudos em desenvolvimento Back-End, abordando li
 - [`JAVA-BASICO`](./JAVA-BASICO): Introdução à linguagem Java e POO.
 - [`JAVA-CLOUD-NATIVE`](./JAVA-CLOUD-NATIVE): Desenvolvimento com foco em aplicações cloud native usando Java.
 - [`PYTHON`](./PYTHON): Sintaxe básica, lógica e automação com Python.
+- [`MySQL`](./MySQL): Conceitos de Banco de Dados com MySQL.
 
 ## 📌 Observações
 
